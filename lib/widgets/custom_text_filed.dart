@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/constans.dart';
 
 class CustomTextFiled extends StatelessWidget {
-  const CustomTextFiled({super.key, required this.hint, this.maxLine = 1});
+  const CustomTextFiled({super.key, this.maxLine = 1, required this.label});
 
-  final String hint;
+  final String label;
   final int maxLine;
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,7 @@ class CustomTextFiled extends StatelessWidget {
         cursorColor: kPrimaryColor,
         maxLines: maxLine,
         decoration: InputDecoration(
-          hintText: hint,
-          label: Text(hint),
+          label: Text(label),
           focusedBorder: textFiledBorder(),
           enabledBorder: textFiledBorder(),
         ));
