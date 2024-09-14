@@ -11,9 +11,11 @@ class NotesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+     theme: ThemeData.dark(),
       routes: {
         HomeView.id: (contxet) => const HomeView(),
       },
+      initialRoute: HomeView.id,
     );
   }
 }
