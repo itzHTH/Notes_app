@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constans.dart';
+import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_filed.dart';
 
 class BottomSheetBody extends StatelessWidget {
@@ -10,46 +11,62 @@ class BottomSheetBody extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.all(24),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomTextFiled(
-              label: "Title",
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            CustomTextFiled(
-              label: "Content",
-              maxLine: 5,
-            ),
-            SizedBox(
-              height: 45,
-            ),
-            CustomButton(),
-          ],
-        ),
+        child: AddNoteForm(),
       ),
     );
   }
 }
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({super.key});
 
   @override
+  State<AddNoteForm> createState() => _AddNoteFormState();
+}
+
+GlobalKey<FormState> formKey = GlobalKey();
+AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+String? title, subtitle;
+
+class _AddNoteFormState extends State<AddNoteForm> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 55,
-      width: MediaQuery.sizeOf(context).width,
-      decoration: BoxDecoration(
-        color: kPrimaryColor,
-        borderRadius: BorderRadius.circular(16),
+    return Form(
+      key: formKey,
+      autovalidateMode: autovalidateMode,
+      child: Column(
+        children: [
+          CustomTextFiled(
+            label: "Title",
+            onSaved: (value) {
+              title = value;
+            },
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          CustomTextFiled(
+            onSaved: (value) {
+              subtitle = value;
+            },
+            label: "Content",
+            maxLine: 5,
+          ),
+          const SizedBox(
+            height: 45,
+          ),
+          CustomButton(
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+              } else {
+                autovalidateMode = AutovalidateMode.always;
+                setState(() {});
+              }
+            },
+          ),
+        ],
       ),
-      child: const Center(
-          child: Text(
-        "Add",
-        style: TextStyle(color: Colors.black),
-      )),
     );
   }
 }
