@@ -19,12 +19,12 @@ class BottomSheetBody extends StatelessWidget {
               Navigator.pop(context);
             }
             if (state is AddNoteFailure) {
-              print(state.errMessage);
+              debugPrint(state.errMessage);
             }
           },
           builder: (context, state) {
-            return ModalProgressHUD(
-                inAsyncCall: state is AddNoteLoading ? true : false,
+            return AbsorbPointer(
+                absorbing: state is AddNoteLoading ? true : false,
                 child: const SingleChildScrollView(child: AddNoteForm()));
           },
         ),
