@@ -14,6 +14,7 @@ class HomeView extends StatelessWidget {
         backgroundColor: const Color(0xff5aefca),
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
               context: context,
               builder: (context) {
                 return const BottomSheetBody();
