@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/constans.dart';
-import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
+import 'package:notes_app/helper/show_success_toast.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/color_item.dart';
 import 'package:notes_app/widgets/custom_appbar.dart';
@@ -34,6 +34,7 @@ class _EditViewBodyState extends State<EditViewBody> {
               widget.note.subtitle = subtitle ?? widget.note.subtitle;
               widget.note.save();
               BlocProvider.of<NotesCubit>(context).fetchNote();
+              showSuccessToast(context);
               Navigator.pop(context);
             },
             icon: Icons.check,

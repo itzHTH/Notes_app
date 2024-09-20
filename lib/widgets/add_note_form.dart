@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app/constans.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app/helper/show_success_toast.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/color_item.dart';
 import 'package:notes_app/widgets/custom_button.dart';
@@ -46,9 +47,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(
             height: 20,
           ),
-          const ListColorItemView(
-            
-          ),
+          const ListColorItemView(),
           const SizedBox(
             height: 20,
           ),
@@ -67,6 +66,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                         subtitle: subtitle!,
                         date: formattedCurrentDate,
                         color: Colors.blue.value);
+                    showSuccessToast(context);
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                   } else {
                     autovalidateMode = AutovalidateMode.always;
@@ -82,10 +82,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
   }
 }
 
-
 class ListColorItemView extends StatefulWidget {
   const ListColorItemView({super.key});
-
 
   @override
   State<ListColorItemView> createState() => _ListColorItemViewState();
