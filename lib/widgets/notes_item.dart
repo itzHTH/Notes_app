@@ -13,7 +13,7 @@ class NotesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, EditView.id);
+        Navigator.pushNamed(context, EditView.id, arguments: note);
       },
       child: Container(
         decoration: BoxDecoration(

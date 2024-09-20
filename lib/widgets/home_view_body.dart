@@ -20,18 +20,19 @@ class _HomeViewBodyState extends State<HomeViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           CustomAppbar(
+            onPressed: () {},
             icon: Icons.search,
             title: "Notes",
           ),
-          Expanded(child: NotesListBuilder()),
+          const Expanded(child: NotesListBuilder()),
         ],
       ),
     );

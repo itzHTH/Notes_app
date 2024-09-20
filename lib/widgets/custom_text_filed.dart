@@ -3,10 +3,16 @@ import 'package:notes_app/constans.dart';
 
 class CustomTextFiled extends StatelessWidget {
   const CustomTextFiled(
-      {super.key, this.maxLine = 1, required this.label, this.onSaved});
+      {super.key,
+      this.maxLine = 1,
+      required this.label,
+      this.onSaved,
+      this.hint, this.onChanged});
 
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
   final String label;
+  final String? hint;
   final int maxLine;
   @override
   Widget build(BuildContext context) {
@@ -19,9 +25,11 @@ class CustomTextFiled extends StatelessWidget {
             return null;
           }
         },
+        onChanged: onChanged,
         cursorColor: kPrimaryColor,
         maxLines: maxLine,
         decoration: InputDecoration(
+          hintText: hint,
           label: Text(
             label,
             style: const TextStyle(color: Colors.white),
