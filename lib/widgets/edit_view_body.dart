@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/constans.dart';
+import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/widgets/color_item.dart';
 import 'package:notes_app/widgets/custom_appbar.dart';
 import 'package:notes_app/widgets/custom_text_filed.dart';
 
@@ -56,9 +59,54 @@ class _EditViewBodyState extends State<EditViewBody> {
             hint: widget.note.subtitle,
             label: "Content",
             maxLine: 5,
-          )
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          ListColorItemView(
+            note: widget.note,
+          ),
         ],
       ),
+    );
+  }
+}
+
+class ListColorItemView extends StatefulWidget {
+  const ListColorItemView({super.key, required this.note});
+  final NoteModel note;
+  @override
+  State<ListColorItemView> createState() => _ListColorItemViewState();
+}
+
+class _ListColorItemViewState extends State<ListColorItemView> {
+  late int currentIndex;
+
+  @override
+  void initState() {
+    currentIndex = kColors.indexOf(Color(widget.note.color));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 38 * 2,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: kColors.length,
+          itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: GestureDetector(
+                  onTap: () {
+                    currentIndex = index;
+                    widget.note.color = kColors[currentIndex].value;
+                    setState(() {});
+                  },
+                  child: ColorItem(
+                      isActive: currentIndex == index, color: kColors[index]),
+                ),
+              )),
     );
   }
 }

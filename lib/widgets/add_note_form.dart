@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:notes_app/constans.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/widgets/color_item.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 import 'package:notes_app/widgets/custom_text_filed.dart';
 
@@ -46,7 +47,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             height: 20,
           ),
           const ListColorItemView(
-            color: Colors.black,
+            
           ),
           const SizedBox(
             height: 20,
@@ -81,31 +82,10 @@ class _AddNoteFormState extends State<AddNoteForm> {
   }
 }
 
-class ColorItem extends StatelessWidget {
-  const ColorItem({super.key, required this.color, required this.isActive});
-  final Color color;
-  final bool isActive;
-  @override
-  Widget build(BuildContext context) {
-    return isActive
-        ? CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 38,
-            child: CircleAvatar(
-              backgroundColor: color,
-              radius: 36,
-            ),
-          )
-        : CircleAvatar(
-            backgroundColor: color,
-            radius: 36,
-          );
-  }
-}
 
 class ListColorItemView extends StatefulWidget {
-  const ListColorItemView({super.key, required this.color});
-  final Color color;
+  const ListColorItemView({super.key});
+
 
   @override
   State<ListColorItemView> createState() => _ListColorItemViewState();
