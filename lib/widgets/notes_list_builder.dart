@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
+import 'package:notes_app/helper/show_success_toast.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/notes_item.dart';
 
@@ -16,7 +19,7 @@ class NotesListBuilder extends StatelessWidget {
         return notesLits.isEmpty
             ? const Center(
                 child: Text(
-                  "You Don't Have Any note \nadd New note .",
+                  "You Don't Have Any Note \nAdd New note .",
                   style: TextStyle(fontSize: 20),
                 ),
               )
@@ -28,8 +31,28 @@ class NotesListBuilder extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
-                      child: NotesItem(
-                        note: notesLits[index],
+                      child: Slidable(
+                        key: const ValueKey(0),
+                        endActionPane: ActionPane(
+                            dismissible: DismissiblePane(onDismissed: () {
+                              DeleteNote(notesLits, index, context);
+                            }),
+                            motion: const DrawerMotion(),
+                            children: [
+                              SlidableAction(
+                                backgroundColor: Colors.white.withOpacity(0.7),
+                                label: "Delete",
+                                icon: FontAwesomeIcons.deleteLeft,
+                                onPressed: (context) {
+                                  DeleteNote(notesLits, index, context);
+                                },
+                                borderRadius: BorderRadius.circular(8),
+                                spacing: 0,
+                              )
+                            ]),
+                        child: NotesItem(
+                          note: notesLits[index],
+                        ),
                       ),
                     );
                   },
@@ -37,5 +60,11 @@ class NotesListBuilder extends StatelessWidget {
               );
       },
     );
+  }
+
+  void DeleteNote(List<NoteModel> notesLits, int index, BuildContext context) {
+    notesLits[index].delete();
+    BlocProvider.of<NotesCubit>(context).fetchNote();
+    showSuccessToast(context);
   }
 }

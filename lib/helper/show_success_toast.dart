@@ -16,6 +16,9 @@ showSuccessToast(BuildContext context) {
             child: Row(
               children: [
                 Icon(FontAwesomeIcons.circleCheck),
+                SizedBox(
+                  width: 10,
+                ),
                 Text("Success"),
               ],
             ),
