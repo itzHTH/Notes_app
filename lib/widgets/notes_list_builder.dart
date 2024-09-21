@@ -35,7 +35,7 @@ class NotesListBuilder extends StatelessWidget {
                         key: const ValueKey(0),
                         endActionPane: ActionPane(
                             dismissible: DismissiblePane(onDismissed: () {
-                              DeleteNote(notesLits, index, context);
+                              deleteNote(notesLits, index, context);
                             }),
                             motion: const DrawerMotion(),
                             children: [
@@ -44,7 +44,7 @@ class NotesListBuilder extends StatelessWidget {
                                 label: "Delete",
                                 icon: FontAwesomeIcons.deleteLeft,
                                 onPressed: (context) {
-                                  DeleteNote(notesLits, index, context);
+                                  deleteNote(notesLits, index, context);
                                 },
                                 borderRadius: BorderRadius.circular(8),
                                 spacing: 0,
@@ -62,7 +62,7 @@ class NotesListBuilder extends StatelessWidget {
     );
   }
 
-  void DeleteNote(List<NoteModel> notesLits, int index, BuildContext context) {
+  void deleteNote(List<NoteModel> notesLits, int index, BuildContext context) {
     notesLits[index].delete();
     BlocProvider.of<NotesCubit>(context).fetchNote();
     showSuccessToast(context);
