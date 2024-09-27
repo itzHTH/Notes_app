@@ -36,6 +36,7 @@ class NotesListBuilder extends StatelessWidget {
                         endActionPane: ActionPane(
                             dismissible: DismissiblePane(onDismissed: () {
                               deleteNote(notesLits, index, context);
+                              
                             }),
                             motion: const DrawerMotion(),
                             children: [

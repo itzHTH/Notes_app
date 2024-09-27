@@ -7,7 +7,8 @@ class CustomTextFiled extends StatelessWidget {
       this.maxLine = 1,
       required this.label,
       this.onSaved,
-      this.hint, this.onChanged});
+      this.hint,
+      this.onChanged});
 
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
@@ -32,7 +33,7 @@ class CustomTextFiled extends StatelessWidget {
           hintText: hint,
           label: Text(
             label,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
           ),
           border: textFiledBorder(),
           focusedBorder: textFiledBorder(),
