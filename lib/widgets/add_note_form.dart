@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app/constans.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/helper/show_success_toast.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/color_item.dart';
@@ -68,6 +69,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
                         color: Colors.blue.value);
                     showSuccessToast(context);
                     BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                    BlocProvider.of<NotesCubit>(context)
+                        .key
+                        .currentState!
+                        .insertItem(BlocProvider.of<NotesCubit>(context)
+                            .notesList!
+                            .length);
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});

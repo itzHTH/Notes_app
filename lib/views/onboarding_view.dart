@@ -22,6 +22,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   String nextButtonText = "Next";
   bool isLastPage = false;
+  FontWeight fontWeight = FontWeight.normal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +33,12 @@ class _OnboardingViewState extends State<OnboardingView> {
             if (page == 3) {
               nextButtonText = "Finish";
               isLastPage = true;
+              fontWeight = FontWeight.bold;
               setState(() {});
             } else {
               nextButtonText = "Next";
               isLastPage = false;
+              fontWeight = FontWeight.normal;
               setState(() {});
             }
           },
@@ -58,7 +61,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       },
                       child: const Text(
                         "Skip",
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ),
               Padding(
@@ -82,9 +85,15 @@ class _OnboardingViewState extends State<OnboardingView> {
                         curve: Curves.easeIn);
                   }
                 },
-                child: Text(
-                  nextButtonText,
-                  style: const TextStyle(fontSize: 16),
+                child: AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 500),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: fontWeight,
+                      color: Colors.black),
+                  child: Text(
+                    nextButtonText,
+                  ),
                 ),
               ),
             ],
